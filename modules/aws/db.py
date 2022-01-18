@@ -6,11 +6,9 @@ import boto3
 import sqlite3
 from sqlite3 import Error
 
+from libs.aws.aws_session import AWS_ACCESS_KEY_ID
 from libs.aws.sql import *
 
-session = boto3.Session()
-credentials = session.get_credentials()
-AWS_ACCESS_KEY_ID = credentials.access_key
 
 
 # for a key, what services does it have listed in the DB

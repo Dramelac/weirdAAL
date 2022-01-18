@@ -13,12 +13,7 @@ pp = pprint.PrettyPrinter(indent=5, width=80)
 # cloudfront only supports us-east-1 https://docs.aws.amazon.com/general/latest/gr/cf_region.html
 regions = ['us-east-1']
 
-'''
-Code to get the AWS_ACCESS_KEY_ID from boto3
-'''
-session = boto3.Session()
-credentials = session.get_credentials()
-AWS_ACCESS_KEY_ID = credentials.access_key
+from aws_session import *
 
 
 def cloudfront_list_distributions():

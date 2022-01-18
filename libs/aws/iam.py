@@ -16,12 +16,7 @@ pp = pprint.PrettyPrinter(indent=5, width=80)
 region = 'us-east-1'
 regions = ['us-east-1']
 
-'''
-Code to get the AWS_ACCESS_KEY_ID from boto3
-'''
-session = boto3.Session()
-credentials = session.get_credentials()
-AWS_ACCESS_KEY_ID = credentials.access_key
+from aws_session import *
 
 
 def check_root_account():

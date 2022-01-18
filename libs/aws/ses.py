@@ -12,12 +12,7 @@ pp = pprint.PrettyPrinter(indent=5, width=80)
 # https://docs.amazonaws.cn/en_us/general/latest/gr/ses.html
 regions = ['us-east-1', 'us-west-2', 'ap-south-1', 'ap-southeast-2', 'ca-central-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1', 'us-gov-west-1']
 
-'''
-Code to get the AWS_ACCESS_KEY_ID from boto3
-'''
-session = boto3.Session()
-credentials = session.get_credentials()
-AWS_ACCESS_KEY_ID = credentials.access_key
+from aws_session import *
 
 
 def list_identities():

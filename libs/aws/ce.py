@@ -13,12 +13,7 @@ pp = pprint.PrettyPrinter(indent=5, width=80)
 # https://docs.aws.amazon.com/general/latest/gr/billing.html
 regions = ['us-east-1', ]
 
-'''
-Code to get the AWS_ACCESS_KEY_ID from boto3
-'''
-session = boto3.Session()
-credentials = session.get_credentials()
-AWS_ACCESS_KEY_ID = credentials.access_key
+from aws_session import *
 
 
 def ce_get_cost_and_usage():
