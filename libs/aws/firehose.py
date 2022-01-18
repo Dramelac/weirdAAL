@@ -10,7 +10,7 @@ import sys
 
 pp = pprint.PrettyPrinter(indent=5, width=80)
 
-from aws_session import *
+from libs.aws.aws_session import *
 
 
 def firehose_list_delivery_streams():

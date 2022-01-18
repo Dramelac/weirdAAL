@@ -7,7 +7,7 @@ import botocore
 import pprint
 import sys
 
-from aws_session import *
+from libs.aws.aws_session import *
 
 pp = pprint.PrettyPrinter(indent=5, width=80)
 

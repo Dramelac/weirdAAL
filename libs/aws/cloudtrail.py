@@ -20,7 +20,7 @@ regions = ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2', 'af-south-1', 'ap
 Code to get the AWS_ACCESS_KEY_ID from boto3
 '''
 try:
-    from aws_session import *
+    from libs.aws.aws_session import *
 
 #  Little hack to gracefully handle messed up .env/.aws credentials file as this is the first 
 #  library that is loaded

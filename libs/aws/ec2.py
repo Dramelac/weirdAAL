@@ -14,7 +14,7 @@ from libs.aws.sql import *
 
 pp = pprint.PrettyPrinter(indent=5, width=80)
 
-from aws_session import *
+from libs.aws.aws_session import *
 
 
 def review_encrypted_volumes():

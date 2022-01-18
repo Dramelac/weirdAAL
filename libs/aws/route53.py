@@ -15,7 +15,7 @@ regions = ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2', 'af-south-1', 'ap
 
 region_single = ['us-east-1']
 
-from aws_session import *
+from libs.aws.aws_session import *
 
 
 def list_geolocations():

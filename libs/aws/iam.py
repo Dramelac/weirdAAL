@@ -16,7 +16,7 @@ pp = pprint.PrettyPrinter(indent=5, width=80)
 region = 'us-east-1'
 regions = ['us-east-1']
 
-from aws_session import *
+from libs.aws.aws_session import *
 
 
 def check_root_account():

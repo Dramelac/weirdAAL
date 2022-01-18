@@ -7,13 +7,13 @@ import botocore
 import pprint
 import sys
 
+from libs.aws.aws_session import AWS_ACCESS_KEY_ID
+
 pp = pprint.PrettyPrinter(indent=5, width=80)
 
 # from http://docs.aws.amazon.com/general/latest/gr/rande.html
 # https://docs.aws.amazon.com/general/latest/gr/billing.html
 regions = ['us-east-1', ]
-
-from aws_session import *
 
 
 def ce_get_cost_and_usage():

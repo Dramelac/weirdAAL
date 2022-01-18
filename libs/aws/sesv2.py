@@ -12,7 +12,7 @@ pp = pprint.PrettyPrinter(indent=5, width=80)
 # https://docs.amazonaws.cn/en_us/general/latest/gr/ses.html
 regions = ['us-east-1', 'us-west-2', 'ap-south-1', 'ap-southeast-2', 'ca-central-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'sa-east-1', 'us-gov-west-1']
 
-from aws_session import *
+from libs.aws.aws_session import *
 
 
 def list_email_identities():

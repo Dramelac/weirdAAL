@@ -8,9 +8,10 @@ import os
 import pprint
 import sys
 
+from libs.aws.aws_session import AWS_ACCESS_KEY_ID, regions
+
 pp = pprint.PrettyPrinter(indent=5, width=80)
 
-from aws_session import *
 
 
 def list_functions():
