@@ -7,7 +7,7 @@ import botocore
 import pprint
 import sys
 
-from libs.aws.aws_session import AWS_ACCESS_KEY_ID
+from libs.aws.aws_session import AWS_ACCESS_KEY_ID, awsclient
 
 pp = pprint.PrettyPrinter(indent=5, width=80)
 
@@ -22,7 +22,7 @@ def ce_get_cost_and_usage():
     '''
     try:
         for region in regions:
-            client = boto3.client('ce', region_name=region)
+            client = awsclient('ce', region_name=region)
             response = client.get_cost_and_usage(TimePeriod={'Start': '2018-01-01', 'End': '2018-04-01'}, Granularity='MONTHLY', Metrics=["BlendedCost", "UnblendedCost", "UsageQuantity"],)
             print(response)
             # This module needs to be further tested

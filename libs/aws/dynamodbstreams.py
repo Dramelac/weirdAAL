@@ -20,7 +20,7 @@ def list_dynamodbstreams():
     print("### Printing DynamoDBstreams ###")
     try:
         for region in regions:
-            client = boto3.client('dynamodbstreams', region_name=region)
+            client = awsclient('dynamodbstreams', region_name=region)
             response = client.list_streams()
             if response.get('Streams') is None:
                 print("{} likely does not have DynamoDB permissions\n" .format(AWS_ACCESS_KEY_ID))

@@ -23,7 +23,7 @@ def check_root_account():
     '''
     Do various checks to see if the account has root or elevated IAM privs
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         acct_summary = client.get_account_summary()
@@ -70,7 +70,7 @@ def iam_change_user_console_password(username, password):
     '''
     Change the IAM console password of a specified user with the specified password
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         response = client.update_login_profile(UserName=username, Password=password, PasswordResetRequired=False)
@@ -92,7 +92,7 @@ def iam_create_user_console_password(username, password):
     '''
     create new IAM account with the specified username and password
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         response = client.create_login_profile(UserName=username, Password=password, PasswordResetRequired=False)
@@ -113,7 +113,7 @@ def get_password_policy():
     '''
     Get the password policy
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         pass_policy = client.get_account_password_policy()
@@ -129,7 +129,7 @@ def get_account_authorization_details():
     '''
     Get the account authoirzation details
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         deets = client.get_account_authorization_details()
@@ -146,7 +146,7 @@ def iam_create_user(username):
     This creates a IAM user, this does not set a password you need to call the
     iam_create_user_console_password afterwards
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         print("Creating a new IAM user named: {}" .format(username))
@@ -167,7 +167,7 @@ def iam_create_access_key(username):
     '''
     Create a new access & secret key for the specified username
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         create_access_key = client.create_access_key(UserName=username)
@@ -183,7 +183,7 @@ def iam_delete_access_key(username, accesskey):
     '''
     Delete the specified access key for the specified user and specified access key
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         delete_access_key = client.delete_access_key(UserName=username, AccessKeyId=accesskey)
@@ -202,7 +202,7 @@ def iam_delete_mfa_device(username, mfaserial):
     '''
     Delete the specified MFA serial number for the specified username
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
     try:
         delete_mfa = client.deactivate_mfa_device(UserName=username, SerialNumber=mfaserial)
         print("Deleting MFA device: {} for: {}" .format(mfaserial, username))
@@ -220,7 +220,7 @@ def iam_list_mfa_device(username):
     '''
     List MFA devices for a specified username
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
     try:
         response = client.list_mfa_devices(UserName=username)
         # print(response)
@@ -251,7 +251,7 @@ def iam_make_admin(username):
     '''
     Attach the builtin admin policy to the specified username
     '''
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         make_admin = client.attach_user_policy(UserName=username, PolicyArn='arn:aws:iam::aws:policy/AdministratorAccess')
@@ -268,7 +268,7 @@ def iam_make_admin(username):
 
 
 def iam_make_backdoor_account(username, password):
-    client = boto3.client('iam', region_name=region)
+    client = awsclient('iam', region_name=region)
 
     try:
         print("Making backdoor account with username: {}" .format(username))
@@ -290,7 +290,7 @@ def iam_list_groups():
     print("### Printing IAM Groups ###")
     try:
         for region in regions:
-            client = boto3.client('iam', region_name=region)
+            client = awsclient('iam', region_name=region)
             response = client.list_groups()
             if response.get('Groups') is None:
                 print("{} likely does not have IAM permissions\n" .format(AWS_ACCESS_KEY_ID))
@@ -324,7 +324,7 @@ def iam_get_user():
     print("### Printing IAM User Info ###")
     try:
         for region in regions:
-            client = boto3.client('iam', region_name=region)
+            client = awsclient('iam', region_name=region)
             response = client.get_user()
             print(response)
             if response.get('User') is None:
@@ -359,7 +359,7 @@ def iam_get_account_summary():
     print("### Printing IAM Account Summary ###")
     try:
         for region in regions:
-            client = boto3.client('iam', region_name=region)
+            client = awsclient('iam', region_name=region)
             response = client.get_account_summary()
             # print(response)
             if response.get('SummaryMap') is None:
@@ -391,7 +391,7 @@ def iam_list_users():
     print("### Printing IAM Users ###")
     try:
         for region in regions:
-            client = boto3.client('iam', region_name=region)
+            client = awsclient('iam', region_name=region)
             response = client.list_users()
             # print(response)
             if response.get('Users') is None:
@@ -423,7 +423,7 @@ def iam_list_roles():
     print("### Printing IAM Roles ###")
     try:
         for region in regions:
-            client = boto3.client('iam', region_name=region)
+            client = awsclient('iam', region_name=region)
             response = client.list_roles()
             # print(response)
             if response.get('Roles') is None:
@@ -457,7 +457,7 @@ def iam_list_roles_assumable():
     print("### Roles that can be Assumed by AWS Principals ###")
     try:
         for region in regions:
-            client = boto3.client('iam', region_name=region)
+            client = awsclient('iam', region_name=region)
             response = client.list_roles()
             roles = response.get("Roles")
             for role in roles:
@@ -485,7 +485,7 @@ def iam_list_policies():
     print("### Printing IAM Policies ###")
     try:
         for region in regions:
-            client = boto3.client('iam', region_name=region)
+            client = awsclient('iam', region_name=region)
             response = client.list_policies()
             # print(response)
             if response.get('Policies') is None:
@@ -521,7 +521,7 @@ def iam_list_policies_attached():
     print("### Printing IAM Policies ###")
     try:
         for region in regions:
-            client = boto3.client('iam', region_name=region)
+            client = awsclient('iam', region_name=region)
             response = client.list_policies(OnlyAttached=True)
             # print(response)
             if response.get('Policies') is None:

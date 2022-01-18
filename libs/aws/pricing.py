@@ -18,7 +18,7 @@ def pricing_describe_services():
     '''
     try:
         for region in regions:
-            client = boto3.client('pricing', region_name=region)
+            client = awsclient('pricing', region_name=region)
             response = client.describe_services()
             print(response)
             if response.get('Services') is None:

@@ -28,7 +28,7 @@ def review_encrypted_volumes():
         with open("{}-volumes_list.txt" .format(AWS_ACCESS_KEY_ID), "w") as fout:
             for region in regions:
                 try:
-                    client = boto3.client('ec2', region_name=region)
+                    client = awsclient('ec2', region_name=region)
                     response = client.describe_volumes(Filters=[{
                         'Name': 'status',
                         'Values': ['in-use']
@@ -73,7 +73,7 @@ def describe_instances():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_instances()
                 # print(response)
             except botocore.exceptions.ClientError as e:
@@ -125,7 +125,7 @@ def describe_instances_basic():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_instances()
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == 'UnauthorizedOperation':
@@ -183,7 +183,7 @@ def write_instances_to_file():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_instances()
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == 'UnauthorizedOperation':
@@ -219,7 +219,7 @@ def ec2_stop_instance_dryrun(instanceid, region):
     Attempt to stop (passing dryrun flag) the specified instanceID on the specififed region
     '''
     try:
-        client = boto3.client('ec2', region_name=region)
+        client = awsclient('ec2', region_name=region)
         print("[INFO] Checking for permissions to stop instance (DryRun): {} on {} ** no ec2s were hurt during this ** [INFO]" .format(instanceid, region))
         response = client.stop_instances(DryRun=True, InstanceIds=['{}'.format(instanceid)])
         # print(response)
@@ -246,7 +246,7 @@ def ec2_list_launchable_ami():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_images(ExecutableUsers=['self'])
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == 'UnauthorizedOperation':
@@ -283,7 +283,7 @@ def ec2_list_owner_ami():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 # response = client.describe_images(Filters=[{'Name': 'is-public','Values': ['False',]},])
                 response = client.describe_images(Owners=['self'])
             except botocore.exceptions.ClientError as e:
@@ -321,7 +321,7 @@ def get_instance_volume_details():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 instances = client.describe_instances()
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == 'UnauthorizedOperation':
@@ -353,7 +353,7 @@ def get_instance_userdata():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 instances = client.describe_instances()
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == 'UnauthorizedOperation':
@@ -403,7 +403,7 @@ def get_instance_volume_details2():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_volumes(Filters=[{
                     'Name': 'status',
                     'Values': ['in-use']
@@ -437,7 +437,7 @@ def describe_elastic_addresses():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_addresses()
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == 'UnauthorizedOperation':
@@ -471,7 +471,7 @@ def describe_publicips():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_network_interfaces()
                 # print(response)
             except botocore.exceptions.ClientError as e:
@@ -511,7 +511,7 @@ def describe_network_interfaces():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_network_interfaces()
                 # print(response)
             except botocore.exceptions.ClientError as e:
@@ -547,7 +547,7 @@ def describe_route_tables():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_route_tables()
                 # print(response)
             except botocore.exceptions.ClientError as e:
@@ -581,7 +581,7 @@ def get_console_screenshot(instanceid, region):
     Get console screenshot of the specified InstanceID in the specified region
     '''
     try:
-        client = boto3.client('ec2', region_name=region)
+        client = awsclient('ec2', region_name=region)
         print("[INFO] Checking for required permissions to screenshot: {} on {} [INFO]" .format(instanceid, region))
         response = client.get_console_screenshot(DryRun=True, InstanceId=instanceid, WakeUp=True)
         # print(response)
@@ -611,7 +611,7 @@ def get_console_screenshot_all():
     try:
         for region in regions:
             try:
-                client = boto3.client('ec2', region_name=region)
+                client = awsclient('ec2', region_name=region)
                 response = client.describe_instances()
             except botocore.exceptions.ClientError as e:
                 if e.response['Error']['Code'] == 'UnauthorizedOperation':

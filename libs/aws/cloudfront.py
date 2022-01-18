@@ -23,7 +23,7 @@ def cloudfront_list_distributions():
     print("### Printing CloudFront Distributions ###")
     try:
         for region in regions:
-            client = boto3.client('cloudfront', region_name=region)
+            client = awsclient('cloudfront', region_name=region)
 
             response = client.list_distributions()
             # print(response)

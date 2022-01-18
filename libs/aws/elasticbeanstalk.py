@@ -20,7 +20,7 @@ def elasticbeanstalk_describe_applications():
     print("### Printing ElasticBeanstalk Applications ###")
     try:
         for region in regions:
-            client = boto3.client('elasticbeanstalk', region_name=region)
+            client = awsclient('elasticbeanstalk', region_name=region)
             response = client.describe_applications()
             # print(response)
 
@@ -54,7 +54,7 @@ def elasticbeanstalk_describe_application_versions():
     print("### Printing ElasticBeanstalk Applications Versions ###")
     try:
         for region in regions:
-            client = boto3.client('elasticbeanstalk', region_name=region)
+            client = awsclient('elasticbeanstalk', region_name=region)
             response = client.describe_application_versions()
             # print(response)
 
@@ -89,7 +89,7 @@ def elasticbeanstalk_describe_configuration_options():
     print("### Printing ElasticBeanstalk Configuration Options ###")
     try:
         for region in regions:
-            client = boto3.client('elasticbeanstalk', region_name=region)
+            client = awsclient('elasticbeanstalk', region_name=region)
             response = client.describe_configuration_options()
             # print(response)
 
@@ -128,7 +128,7 @@ def elasticbeanstalk_describe_environments():
     print("### Printing ElasticBeanstalk Environments ###")
     try:
         for region in regions:
-            client = boto3.client('elasticbeanstalk', region_name=region)
+            client = awsclient('elasticbeanstalk', region_name=region)
             response = client.describe_environments()
             # print response
 
@@ -162,7 +162,7 @@ def elasticbeanstalk_describe_events():
     print("### Printing ElasticBeanstalk Environments ###")
     try:
         for region in regions:
-            client = boto3.client('elasticbeanstalk', region_name=region)
+            client = awsclient('elasticbeanstalk', region_name=region)
             response = client.describe_events()
             # print(response)
 

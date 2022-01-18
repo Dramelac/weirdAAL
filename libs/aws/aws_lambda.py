@@ -8,7 +8,7 @@ import os
 import pprint
 import sys
 
-from libs.aws.aws_session import AWS_ACCESS_KEY_ID, regions
+from libs.aws.aws_session import AWS_ACCESS_KEY_ID, regions, awsclient
 
 pp = pprint.PrettyPrinter(indent=5, width=80)
 
@@ -21,7 +21,7 @@ def list_functions():
     print("### Listing Lambda Functions ###")
     try:
         for region in regions:
-            client = boto3.client('lambda', region_name=region)
+            client = awsclient('lambda', region_name=region)
 
             response = client.list_functions()
             # print(response)
@@ -54,7 +54,7 @@ def list_event_source_mappings():
     print("### Listing Lambda Event Source Mappings ###")
     try:
         for region in regions:
-            client = boto3.client('lambda', region_name=region)
+            client = awsclient('lambda', region_name=region)
 
             response = client.list_event_source_mappings()
 
@@ -86,7 +86,7 @@ def lambda_get_function(functionname, region):
     '''
     print("### Attempting to get function {} ###".format(functionname))
     try:
-        client = boto3.client('lambda', region_name=region)
+        client = awsclient('lambda', region_name=region)
 
         response = client.get_function(FunctionName=functionname)
         # print(response)
@@ -119,7 +119,7 @@ def lambda_get_account_settings():
     '''
     print("### Attempting to get account settings ###")
     try:
-        client = boto3.client('lambda')
+        client = awsclient('lambda')
         response = client.get_account_settings()
         # print(response)
         if response.get('AccountLimit') is None:

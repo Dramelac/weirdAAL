@@ -22,7 +22,7 @@ def list_identities():
     print("### Printing SES Identities  ###")
     try:
         for region in regions:
-            client = boto3.client(
+            client = awsclient(
                 'ses',
                 region_name=region
             )
@@ -59,7 +59,7 @@ def get_send_statistics():
     print("### Printing SES Send Statistics  ###")
     try:
         for region in regions:
-            client = boto3.client(
+            client = awsclient(
                 'ses',
                 region_name=region
             )
@@ -96,7 +96,7 @@ def list_configuration_sets():
     print("### Printing SES Configuration Sets  ###")
     try:
         for region in regions:
-            client = boto3.client(
+            client = awsclient(
                 'ses',
                 region_name=region
             )

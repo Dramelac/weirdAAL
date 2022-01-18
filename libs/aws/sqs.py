@@ -21,7 +21,7 @@ def sqs_list_queues():
     '''
     try:
         for region in regions:
-            client = boto3.client("sqs", region_name=region)
+            client = awsclient("sqs", region_name=region)
             response = client.list_queues()
             if response.get('QueueUrls') is None:
                 print("[-] ListQueues allowed for {} but no results [-]" .format(region))

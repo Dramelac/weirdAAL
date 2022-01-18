@@ -23,7 +23,7 @@ def opsworks_describe_stacks():
     print('#### Opsworks Listing Stacks ####')
     try:
         for region in regions:
-            client = boto3.client(
+            client = awsclient(
                 'opsworks',
                 region_name=region
             )
@@ -60,7 +60,7 @@ def opsworks_describe_user_profiles():
     print('#### Opsworks Listing User Profiles ####')
     try:
         for region in regions:
-            client = boto3.client(
+            client = awsclient(
                 'opsworks',
                 region_name=region
             )

@@ -21,7 +21,7 @@ def sts_get_accountid():
     ex: Account Id: 14681234567
     '''
     try:
-        client = boto3.client("sts")
+        client = awsclient("sts")
         account_id = client.get_caller_identity()["Account"]
         print("Account Id: {}" .format(account_id))
     except botocore.exceptions.ClientError as e:
@@ -44,7 +44,7 @@ def sts_get_accountid_all():
     Prints AccountID, UserID, ARN
     '''
     try:
-        client = boto3.client("sts")
+        client = awsclient("sts")
         account_id = client.get_caller_identity()["Account"]
         account_userid = client.get_caller_identity()["UserId"]
         account_arn = client.get_caller_identity()["Arn"]

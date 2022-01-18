@@ -20,7 +20,7 @@ def list_clusters():
     print("### Printing EMR Clusters ###")
     try:
         for region in regions:
-            client = boto3.client('emr', region_name=region)
+            client = awsclient('emr', region_name=region)
             response = client.list_clusters()
 
             if response.get('Clusters') is None:
@@ -53,7 +53,7 @@ def list_security_configurations():
     print("### Printing EMR Security Configuration ###")
     try:
         for region in regions:
-            client = boto3.client('emr', region_name=region)
+            client = awsclient('emr', region_name=region)
             response = client.list_security_configurations()
             # print(response)
 

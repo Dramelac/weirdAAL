@@ -42,7 +42,7 @@ def describe_trails():
     print("### Printing CloudTrail DescribeTrails ###")
     try:
         for region in regions:
-            client = boto3.client('cloudtrail', region_name=region)
+            client = awsclient('cloudtrail', region_name=region)
             response = client.describe_trails()
 
             if response['trailList'] is None:
@@ -79,7 +79,7 @@ def list_public_keys():
     print("### Printing CloudTrail DescribeTrails ###")
     try:
         for region in regions:
-            client = boto3.client('cloudtrail', region_name=region)
+            client = awsclient('cloudtrail', region_name=region)
             response = client.list_public_keys()
 
             if response['PublicKeyList'] is None:
@@ -114,7 +114,7 @@ def stop_trail(TrailARN):
     print("### Attempting to stop trail {} ###\n".format(TrailARN[0]))
     try:
         for region in regions:
-            client = boto3.client('cloudtrail', region_name=region)
+            client = awsclient('cloudtrail', region_name=region)
             response = client.describe_trails()
 
             if response['trailList'] is None:
@@ -127,7 +127,7 @@ def stop_trail(TrailARN):
                     myTrailARN = TrailARN[0]
                     # print(HomeRegion)
                     # print(myTrailARN)
-        client2 = boto3.client('cloudtrail', region_name=HomeRegion)
+        client2 = awsclient('cloudtrail', region_name=HomeRegion)
         response = client2.stop_logging(Name=myTrailARN)
         print(response)
         print("\n")
@@ -157,7 +157,7 @@ def delete_trail(TrailARN):
     print("### Attempting to delete trail {} ###\n".format(TrailARN[0]))
     try:
         for region in regions:
-            client = boto3.client('cloudtrail', region_name=region)
+            client = awsclient('cloudtrail', region_name=region)
             response = client.describe_trails()
 
             if response['trailList'] is None:
@@ -170,7 +170,7 @@ def delete_trail(TrailARN):
                     myTrailARN = TrailARN[0]
                     # print(HomeRegion)
                     # print(myTrailARN)
-        client2 = boto3.client('cloudtrail', region_name=HomeRegion)
+        client2 = awsclient('cloudtrail', region_name=HomeRegion)
         response = client2.delete_trail(Name=myTrailARN)
         print(response)
         print("\n")

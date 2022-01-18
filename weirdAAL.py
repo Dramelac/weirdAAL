@@ -9,6 +9,8 @@
 import boto3
 import argparse
 import os
+
+import botocore
 from botocore.exceptions import ClientError
 from botocore.exceptions import ConfigParseError
 from modules import *
@@ -56,7 +58,7 @@ def perform_credential_check():
     '''
 
     try:
-        client = boto3.client("sts")
+        client = awsclient("sts")
         account_id = client.get_caller_identity()["Account"]
     except (botocore.exceptions.NoCredentialsError) as e:
         print("Error: Unable to locate credentials")

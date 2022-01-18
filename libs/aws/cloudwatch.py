@@ -20,7 +20,7 @@ def cloudwatch_describe_alarms():
     print("### Printing Cloudwatch Alarm Information ###")
     try:
         for region in regions:
-            client = boto3.client('cloudwatch', region_name=region)
+            client = awsclient('cloudwatch', region_name=region)
 
             response = client.describe_alarms()
             print("### {} Alarms ###" .format(region))
@@ -49,7 +49,7 @@ def cloudwatch_describe_alarm_history():
     print("### Printing Cloudwatch Alarm History Information ###")
     try:
         for region in regions:
-            client = boto3.client('cloudwatch', region_name=region)
+            client = awsclient('cloudwatch', region_name=region)
 
             response = client.describe_alarm_history()
             # print(response)
@@ -84,7 +84,7 @@ def cloudwatch_list_metrics():
     print("### Printing Cloudwatch List Metrics ###")
     try:
         for region in regions:
-            client = boto3.client('cloudwatch', region_name=region)
+            client = awsclient('cloudwatch', region_name=region)
 
             response = client.list_metrics()
             # print(response)

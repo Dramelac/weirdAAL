@@ -26,7 +26,7 @@ def list_geolocations():
     try:
         # cheating because they are all the same for this function call
         for region in region_single:
-            client = boto3.client('route53', region_name=region)
+            client = awsclient('route53', region_name=region)
             response = client.list_geo_locations()
             # print(response)
 

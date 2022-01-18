@@ -20,7 +20,7 @@ def ecr_describe_repositories():
     print("### Printing ECR Repositories ###")
     try:
         for region in regions:
-            client = boto3.client('ecr', region_name=region)
+            client = awsclient('ecr', region_name=region)
             response = client.describe_repositories()
 
             if response.get('repositories') is None:

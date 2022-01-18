@@ -17,7 +17,7 @@ def describe_configuration_recorders(region):
     Describe Config recorders
     '''
     try:
-        client = boto3.client("config", region_name=region)
+        client = awsclient("config", region_name=region)
 
         response = client.describe_configuration_recorders()
         region_name = "Region: %s\n" % region
@@ -54,7 +54,7 @@ def describe_configuration_rules(region):
     Describe Config rules
     '''
     try:
-        client = boto3.client("config", region_name=region)
+        client = awsclient("config", region_name=region)
 
         response = client.describe_config_rules()
         region_name = "Region: %s" % region
@@ -91,7 +91,7 @@ def delete_rule(rule_name, region):
     Attempt to delete the specified Config Rule
     '''
     try:
-        client = boto3.client("config", region_name=region)
+        client = awsclient("config", region_name=region)
         client.delete_config_rule(ConfigRuleName=rule_name)
         print("Successfully deleted %s from %s!" % (rule_name, region))
     except botocore.exceptions.ClientError as e:
@@ -118,7 +118,7 @@ def delete_recorder(recorder_name, region):
     Attempt to delete the specified Config recorder
     '''
     try:
-        client = boto3.client("config", region_name=region)
+        client = awsclient("config", region_name=region)
         client.delete_configuration_recorder(ConfigurationRecorderName=recorder_name)
         print("Successfully deleted %s from %s!" % (recorder_name, region))
     except botocore.exceptions.ClientError as e:

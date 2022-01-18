@@ -20,7 +20,7 @@ region = 'us-east-1'
 
 def s3_get_bucket_policy(bucket):
     try:
-        client = boto3.client('s3', region_name=region)
+        client = awsclient('s3', region_name=region)
         print('\n#### Attempting to list s3 bucket contents and bucket Policy & ACL for {} ####'.format(bucket))
 
         try:
@@ -107,7 +107,7 @@ def s3_get_bucket_policy(bucket):
 
 def s3_list_bucket_contents(bucket):
     try:
-        client = boto3.client('s3', region_name=region)
+        client = awsclient('s3', region_name=region)
         print('\n#### Attempting to list s3 bucket contents for {} ####'.format(bucket))
 
         try:
@@ -145,7 +145,7 @@ def get_s3object_acl(bucket, myfile, region):
 
     '''
     try:
-        client = boto3.client('s3', region_name=region)
+        client = awsclient('s3', region_name=region)
         print('#### Trying to enumate s3 ACL for {}:{} ####\n '.format(bucket, myfile))
         acl = client.get_object_acl(Bucket=bucket, Key=myfile)
         print(acl)
@@ -306,7 +306,7 @@ def s3_get_file_acl(bucket, file):
     get file in a s3 bucket ACL
     '''
     try:
-        client = boto3.client('s3', region_name=region)
+        client = awsclient('s3', region_name=region)
         object_acl = client.get_object_acl(Bucket=bucket, Key=file)
         if object_acl:
             print("{} ACL:\n".format(file))

@@ -23,7 +23,7 @@ def lightsail_get_instances():
     try:
         for region in regions:
             try:
-                client = boto3.client('lightsail', region_name=region)
+                client = awsclient('lightsail', region_name=region)
                 response = client.get_instances()
                 # print(response)
             except botocore.exceptions.ClientError as e:

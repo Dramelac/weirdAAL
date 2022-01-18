@@ -20,7 +20,7 @@ def firehose_list_delivery_streams():
     print("### Printing Firehose Delivery Streams ###")
     try:
         for region in regions:
-            client = boto3.client('firehose', region_name=region)
+            client = awsclient('firehose', region_name=region)
             response = client.list_delivery_streams()
 
             # print(response)
@@ -53,7 +53,7 @@ def firehose_describe_delivery_streams():
     print("### Printing Firehose Delivery Streams & details ###")
     try:
         for region in regions:
-            client = boto3.client('firehose', region_name=region)
+            client = awsclient('firehose', region_name=region)
             response = client.list_delivery_streams()
 
             # print(response)

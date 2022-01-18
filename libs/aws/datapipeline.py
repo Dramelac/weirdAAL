@@ -20,7 +20,7 @@ def datapipeline_list_pipelines():
     print("### Printing Data Pipeline Pipelines ###")
     try:
         for region in regions:
-            client = boto3.client('datapipeline', region_name=region)
+            client = awsclient('datapipeline', region_name=region)
             response = client.list_pipelines()
             print("### {} Data Pipelines ###" .format(region))
             if response.get('pipelineIdList') is None:

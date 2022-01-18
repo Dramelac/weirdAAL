@@ -20,7 +20,7 @@ def list_dynamodb_tables():
     print("### Printing DynamoDB Tables ###")
     try:
         for region in regions:
-            client = boto3.client('dynamodb', region_name=region)
+            client = awsclient('dynamodb', region_name=region)
             response = client.list_tables()
             if response.get('TableNames') is None:
                 print("{} likely does not have DynamoDB permissions\n" .format(AWS_ACCESS_KEY_ID))
@@ -52,7 +52,7 @@ def list_dynamodb_tables_detailed():
     print("### Printing DynamoDB Tables ###")
     try:
         for region in regions:
-            client = boto3.client('dynamodb', region_name=region)
+            client = awsclient('dynamodb', region_name=region)
             response = client.list_tables()
             if response.get('TableNames') is None:
                 print("{} likely does not have DynamoDB permissions\n" .format(AWS_ACCESS_KEY_ID))
@@ -85,7 +85,7 @@ def describe_table(table, region):
     '''
     print("### Describing DynamoDB Table: {} ###" .format(table))
     try:
-        client = boto3.client('dynamodb', region_name=region)
+        client = awsclient('dynamodb', region_name=region)
         response = client.describe_table(TableName=table)
         if response.get('Table') is None:
             print("{} likely does not have DynamoDB permissions\n" .format(AWS_ACCESS_KEY_ID))

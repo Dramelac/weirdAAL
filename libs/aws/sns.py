@@ -6,7 +6,7 @@ import boto3
 import botocore
 import sys
 
-from libs.aws.aws_session import AWS_ACCESS_KEY_ID
+from libs.aws.aws_session import AWS_ACCESS_KEY_ID, awsclient
 
 regions = ['us-east-1', 'us-east-2', 'us-west-1', 'us-west-2', 'af-south-1', 'ap-east-1', 'ap-northeast-1', 'ap-northeast-2', 'ap-northeast-3', 'ap-south-1', 'ap-southeast-1', 'ap-southeast-2', 'ca-central-1', 'cn-north-1', 'cn-northwest-1', 'eu-central-1', 'eu-west-1', 'eu-west-2', 'eu-west-3', 'eu-south-1', 'eu-north-1', 'me-south-1', 'sa-east-1', 'us-gov-west-1', 'us-gov-east-1']
 
@@ -19,7 +19,7 @@ def list_sns_topics(should_i_print=True):
         print("-" * len(title))
     try:
         for region in regions:
-            client = boto3.client('sns', region_name=region)
+            client = awsclient('sns', region_name=region)
             topics = client.list_topics()
             if should_i_print:
                 print(region)
@@ -43,7 +43,7 @@ def list_sns_topics(should_i_print=True):
 
 def list_sns_subscribers(topic,region):
     try:
-        client = boto3.client('sns', region_name=region)
+        client = awsclient('sns', region_name=region)
         result = client.list_subscriptions_by_topic(TopicArn=topic)
         subscriptions = result['Subscriptions']
         for sub in subscriptions:
@@ -66,7 +66,7 @@ def list_sns_subscribers(topic,region):
 
 def delete_sns_topic(topic, region):
     try:
-        client = boto3.client('sns', region_name=region)
+        client = awsclient('sns', region_name=region)
         action = client.delete_topic(TopicArn=topic)
         print("Deleted Topic: {}".format(topic))
     except botocore.exceptions.ClientError as e:
@@ -99,7 +99,7 @@ def list_all_sns_subscribers():
 
 def delete_sns_subscriber(endpoint, region):
     try:
-        client = boto3.client('sns', region_name=region)
+        client = awsclient('sns', region_name=region)
         action = client.delete_endpoint(EndpointArn=endpoint)
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == 'InvalidClientTokenId':

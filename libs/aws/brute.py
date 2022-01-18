@@ -18,7 +18,7 @@ import os
 import pprint
 import sys
 
-from libs.aws.aws_session import AWS_ACCESS_KEY_ID
+from libs.aws.aws_session import AWS_ACCESS_KEY_ID, awsclient
 from libs.aws.sql import *
 
 pp = pprint.PrettyPrinter(indent=5, width=80)
@@ -37,7 +37,7 @@ def get_accountid():
     Get the accountID via sts call
     '''
     try:
-        client = boto3.client("sts")
+        client = awsclient("sts")
         account_id = client.get_caller_identity()["Account"]
         print("Account Id: {}" .format(account_id))
     except botocore.exceptions.ClientError as e:
@@ -55,7 +55,7 @@ def get_accountid():
 
 # NOT QUITE WORKING YET
 # def get_username(AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY):
-#    client = boto3.client("sts", aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
+#    client = awsclient("sts", aws_access_key_id=AWS_ACCESS_KEY_ID, aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
 #    username = client.get_caller_identity()["Arn"].split(':')[5]
 #    print username
 #    return username
@@ -65,7 +65,7 @@ def check_root_account():
     '''
     use IAM calls to check for root/IAM access
     '''
-    client = boto3.client('iam')
+    client = awsclient('iam')
     try:
         acct_summary = client.get_account_summary()
         if acct_summary:
@@ -108,7 +108,7 @@ def check_root_account():
 def generic_permission_bruteforcer(service, tests):
     actions = []
     try:
-        client = boto3.client(service, region_name=region)
+        client = awsclient(service, region_name=region)
     except Exception as e:
         # print('Failed to connect: "{}"' .format(e.error_message))
         print('Failed to connect: "{}"' .format(e))
@@ -146,7 +146,7 @@ def generic_permission_bruteforcer(service, tests):
 def generic_permission_bruteforcer_region(service, tests, region_passed):
     actions = []
     try:
-        client = boto3.client(service, region_name=region)
+        client = awsclient(service, region_name=region)
     except Exception as e:
         # print('Failed to connect: "{}"' .format(e.error_message))
         print('Failed to connect: "{}"' .format(e))
@@ -183,7 +183,7 @@ def generic_permission_bruteforcer_region(service, tests, region_passed):
 
 def generic_method_bruteforcer(service, tests):
     actions = []
-    client = boto3.client(service, region_name=region)
+    client = awsclient(service, region_name=region)
     for api_action, method_name, args, kwargs in tests:
         try:
             method = getattr(client, method_name)
@@ -220,7 +220,7 @@ def generic_method_bruteforcer(service, tests):
 
 def generic_method_bruteforcer_region(service, tests, region_passed):
     actions = []
-    client = boto3.client(service, region_name=region_passed)
+    client = awsclient(service, region_name=region_passed)
     for api_action, method_name, args, kwargs in tests:
         try:
             method = getattr(client, method_name)

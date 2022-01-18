@@ -19,7 +19,7 @@ def describe_db_instances():
     print("### Printing RDS DB instances  ###")
     try:
         for region in regions:
-            client = boto3.client(
+            client = awsclient(
                 'rds',
                 region_name=region
             )

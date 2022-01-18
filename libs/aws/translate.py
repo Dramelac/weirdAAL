@@ -21,7 +21,7 @@ def translate_text(text, source_lang, target_lang):
     '''
     try:
         for region in regions:
-            client = boto3.client('translate', region_name=region)
+            client = awsclient('translate', region_name=region)
             response = client.translate_text(Text=text, SourceLanguageCode=source_lang, TargetLanguageCode=target_lang)
             # print(response)
             if response.get('TranslatedText') is None:

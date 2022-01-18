@@ -22,7 +22,7 @@ def list_email_identities():
     print("### Printing SES Identities  ###")
     try:
         for region in regions:
-            client = boto3.client(
+            client = awsclient(
                 'sesv2',
                 region_name=region
             )
